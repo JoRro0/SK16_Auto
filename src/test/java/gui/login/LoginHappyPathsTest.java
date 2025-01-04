@@ -25,7 +25,7 @@ public class LoginHappyPathsTest extends BaseTest {
         //To do
         // create a method in home page that will check the :
         // 1.1.1. Page Title
-        // 1.1.2. Verify the nav bar login link is shown
+        // 1.1.2. Verify the nav bar login link is shown11
         log.info("STEP 1.1.2. Verify that the login link is presented ");
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
