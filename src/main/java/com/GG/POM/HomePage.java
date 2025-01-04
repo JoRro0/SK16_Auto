@@ -2,7 +2,7 @@ package com.GG.POM;
 
 import org.apache.logging.log4j.Logger;
 
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +21,8 @@ public class HomePage extends BasePage {
     private WebElement navBarProfile;
     @FindBy(id = "nav-link-login")
     private WebElement navBarLogin;
+    @FindBy(id = "//i[@class='fas fa-sign-out-alt fa-lg']")
+    private WebElement navBarLogOut;
 
     public HomePage(WebDriver driver, Logger log) {
         super(driver, log);
@@ -32,22 +34,48 @@ public class HomePage extends BasePage {
     }
 
     public boolean isNavHomeShown() {
-      return  isPresented(navBarHome);
+        return isPresented(navBarHome);
     }
 
     public boolean isNavLoginShown() {
-     return isPresented(navBarLogin);
+        return isPresented(navBarLogin);
     }
 
-    public void clickOnNavBarLogin () {
-       waitAndClickOnWebElement(navBarLogin);
+    public void clickOnNavBarLogin() {
+        waitAndClickOnWebElement(navBarLogin);
     }
 
-    public void clickOnNavBarProfile(){
+    public void clickOnNavBarProfile() {
         waitAndClickOnWebElement(navBarProfile);
     }
 
-    public void clickOnNavBarNewPost () {
-       waitAndClickOnWebElement(navBarNewPost);
+    public void clickOnNavBarNewPost() {
+        waitAndClickOnWebElement(navBarNewPost);
+    }
+
+    public boolean isNavProfileShown() {
+        return isPresented(navBarProfile);
+    }
+
+    public boolean isNavNewPostShown() {
+        return isPresented(navBarNewPost);
+    }
+
+    public boolean isNavLogInLinkVisible() {
+        boolean isLogInLinkVisible = false;
+        try {
+            wait.until(ExpectedConditions.visibilityOf(navBarLogin)).isDisplayed();
+            log.info("CONFIRMATION # The LogIn link is displayed.");
+            isLogInLinkVisible = true;
+        } catch (TimeoutException e) {
+            log.error("ERROR : The LogIn link is NOT displayed!");
+        }
+        return isLogInLinkVisible;
+    }
+    public void clickOnLogOutButton() {
+        waitAndClickOnWebElement(navBarLogOut);
+    }
+    public boolean isNavLogOutLinkShown() {
+        return isPresented(navBarLogOut);
     }
 }

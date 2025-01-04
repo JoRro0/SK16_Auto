@@ -8,27 +8,29 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LoginNegativePathsTest extends BaseTest {
-    private static final String LOGIN_FORM_TITLE = "Sign in";
-    private static final String LOGIN_NOT_SUCCESSFUL_MSG = "User not found";
-    public static final String LOGIN_PAGE = "/users/login";
+import static com.GG.POM.LoginPage.LOGIN_FORM_TITLE;
+import static com.GG.POM.LoginPage.LOGIN_PAGE;
+import static gui.login.LoginHappyPathsTest.LOGIN_NOT_SUCCESSFUL_MSG;
 
-    @Test(DataProvider )
+
+public class LoginNegativePathsTest extends BaseTest {
+
+    @Test()
     public void verifyUserCannotLoginWithWrongUserName() {
         LoginPage loginPage = new LoginPage(super.driver, log);
 
-        log.info("STEP 1: Already registered user is landing Iskilo loginpage");
+        log.info("STEP 1: Already registered user is landing on Iskilo login page");
         loginPage.navigateToLoginPage();
-        //Verification that the user is on login page
+
         log.info("STEP 1.1 Verify that the login link is presented!");
         HomePage homePage = new HomePage(super.driver, log);
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
         log.info("STEP 1.2 Verify that the login form is presented!");
-        //Verification login form is presented
+
         String actualLoginPageFormTitle = loginPage.getLoginPageFormTitle();
 
-        Assert.assertEquals(actualLoginPageFormTitle, LOGIN_FORM_TITLE);
+        Assert.assertEquals(actualLoginPageFormTitle,  LOGIN_FORM_TITLE);
 
         log.info("Step 2 Input WRONG user name");
         loginPage.provideUserName("WRONG");
@@ -36,24 +38,25 @@ public class LoginNegativePathsTest extends BaseTest {
         log.info("Step 3 Input password");
         loginPage.providePassword("testing");
 
-        log.info("Step 4 Click on Login Button");
+        log.info("Step 4 Verify that Login Button is presented!");
+        boolean isLoginButtonShown = loginPage.isLoginButtonShown();
+        Assert.assertTrue(isLoginButtonShown);
+
+        log.info("Step 4.1 Click on Login Button");
         loginPage.clickOnLoginButton();
 
-        //Assertion
-
-        log.info("Step 4.1 Verify that the error message" + loginPage.getLoginActionMessage() + " is shown");
+        log.info("Step 4.2 Verify that the error message" + loginPage.getLoginActionMessage() + " is shown");
         Assert.assertEquals(loginPage.getLoginActionMessage(), LOGIN_NOT_SUCCESSFUL_MSG);
-        //  Login action message shows = ERROR text
-        //If user cannot login - login button states the some =  Form visible
 
-        log.info("Step 4.2 Verify that the login button form is visible");
+        log.info("Step 4.3 Verify that the login button form is visible");
         Assert.assertTrue(isShownNavBarLoginLink);
 
-        // Login button from login Form visible
-        log.info("Step 4.3 Verify that the URL stays the same");
-        boolean isURLLoaded = homePage.isURLLoaded(LOGIN_PAGE);
+        log.info("Step 4.4 Verify that the URL stays the same");
+        boolean isURLLoaded = loginPage.isURLLoaded(LOGIN_PAGE);
         Assert.assertTrue(isURLLoaded);
-        // page ULR = some
+
+        log.info("Step 4.5 Verify that the Profile link is NOT presented!");
+        loginPage.isProfileLinkVisible();
     }
 
     @Test

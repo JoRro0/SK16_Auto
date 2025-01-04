@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 public class PostTests extends BaseTest {
-    public static final String testUser = "testingDemos";
-    public static final String testPassword = "testing";
+    public static final String testUser = "JoRro0";
+    public static final String testPassword = "Georgi123*";
     public static final String caption = "Testing the create post caption";
     File postPicture = new File("src/test/resources/upload/n3Test.jpg");
 

@@ -14,7 +14,7 @@ public class LoginHappyPathsTest extends BaseTest {
 
 
     @Test
-    public void verifyTheUserCannotLoginWithInvalidCredentials() throws InterruptedException {
+    public void verifyTheUserCanLoginWithValidCredentials() throws InterruptedException {
 
         HomePage homePage = new HomePage(super.driver, log);
 
@@ -22,10 +22,9 @@ public class LoginHappyPathsTest extends BaseTest {
         homePage.openHomePage();
 
         log.info("STEP 1.1.Verify the user is on the home page ");
-        //To do
-        // create a method in home page that will check the :
-        // 1.1.1. Page Title
-        // 1.1.2. Verify the nav bar login link is shown11
+        boolean isNavHomeShown = homePage.isNavHomeShown();
+        Assert.assertTrue(isNavHomeShown);
+
         log.info("STEP 1.1.2. Verify that the login link is presented ");
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
@@ -33,31 +32,31 @@ public class LoginHappyPathsTest extends BaseTest {
         log.info("STEP 2: The use is navigating to the login page via click on navigation bar login link");
         homePage.clickOnNavBarLogin();
 
-        //Step 2.1. Verify the user is on login page
         log.info("STEP 2.1.: The user is successfully on the login page");
         LoginPage loginPage = new LoginPage(super.driver,log);
         String actualLoginFormTitle = loginPage.getLoginPageFormTitle();
         Assert.assertEquals(actualLoginFormTitle,LOGIN_FORM_TITLE);
 
-        //Step 3. Provide username
         log.info("STEP 3. Provide username");
-        loginPage.provideUserName(" ");
+        loginPage.provideUserName("JoRro0");
 
-        //Step 4. Provide password
         log.info("STEP 4. Provide password");
-        loginPage.providePassword(" ");
+        loginPage.providePassword("Georgi123*");
 
-        //Step 5. Click on login submit button
-        log.info("STEP 4. Click on loginButton");
+        log.info("STEP 5. Click on loginButton");
         loginPage.clickOnLoginButton();
 
-        //Step 6. Verify successful flow
-        //Step 6.1. Success message
+        log.info("STEP 6. Verify that the success message is displayed");
         String actualLoginActionMSG = loginPage.getLoginActionMessage();
-        Assert.assertEquals(actualLoginActionMSG,LOGIN_NOT_SUCCESSFUL_MSG);
+        Assert.assertEquals(actualLoginActionMSG,LOGIN_SUCCESSFUL_MSG);
 
-        //Step 6.2. LogOut Button
-        //Step 6.3. HomePage navigation bar profile link shown
+        log.info("STEP 6.1 Verify that the LogOut link is displayed");
+        boolean isShownNavBarLogOutLink = homePage.isNavLogOutLinkShown();
+        Assert.assertTrue(isShownNavBarLogOutLink);
+
+        log.info("STEP 6.1 Verify that HomePage navigation bar profile link displayed");
+        boolean isShownNavProfileBar = homePage.isNavProfileShown();
+        Assert.assertTrue(isShownNavProfileBar);
 
 
 

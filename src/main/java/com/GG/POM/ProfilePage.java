@@ -37,6 +37,7 @@ public class ProfilePage extends BasePage {
     @FindBy (xpath = "//div[contains(@aria-label,'Post disliked')]")
     private WebElement postDislikeMessage;
 
+
     public void ClickOnYesButton() {
         waitAndClickOnWebElement(areYouSureYesButton);
     }
@@ -125,4 +126,5 @@ public class ProfilePage extends BasePage {
 
 
     }
+
 }
