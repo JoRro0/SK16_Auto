@@ -10,26 +10,38 @@ import java.io.File;
 public class PostTests extends BaseTest {
     public static final String testUser = "JoRro0";
     public static final String testPassword = "Georgi123*";
-    public static final String caption = "Testing the create post caption";
-    File postPicture = new File("src/test/resources/upload/n3Test.jpg");
+    public static final String caption = "Pivot!";
+    File postPicture = new File("C:\\Users\\35988\\Desktop\\SKILLO_AT_16_TAF-master\\src\\test\\resources\\piiivot.jpg");
 
     @Test(priority = 0)
     public void verifyUserCanCreatePost() {
+        log.info("STEP 1: Already registered user is landing on Iskilo Home page");
         HomePage homePage = new HomePage(super.driver, log);
         homePage.openHomePage();
+        log.info("STEP 1.1: 1.1 Verify that the login link is presented!");
+        boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
+        Assert.assertTrue(isShownNavBarLoginLink);
         homePage.clickOnNavBarLogin();
 
+        log.info("STEP 2 Input valid user name and password");
         LoginPage loginPage = new LoginPage(super.driver, log);
         loginPage.loginWithUSerAndPassword(testUser,testPassword);
 
+        log.info("STEP 2.1 Verify the New post link is presented!");
+        boolean isShownNavBarNewPostLink = homePage.isNavNewPostShown();
+        Assert.assertTrue(isShownNavBarNewPostLink);
         homePage.clickOnNavBarNewPost();
 
         PostPage postPage = new PostPage(super.driver, log);
 
+        log.info("STEP 2.2 Upload a picture");
         postPage.uploadPicture(postPicture);
 
         postPage.providePostCaption(caption);
         postPage.clickCreatePostButton();
+        log.info("STEP 2.2 Verify that the new post (picture) is presented");
+        boolean isImageVisible = postPage.isImageVisible();
+        Assert.assertTrue(isImageVisible);
 
         ProfilePage profilePage = new ProfilePage(super.driver, log);
         boolean isMorePostShown = profilePage.getPostCount() > 0;
@@ -39,6 +51,7 @@ public class PostTests extends BaseTest {
         PostModal postModal = new PostModal(super.driver, log);
         Assert.assertTrue(postModal.isImageVisible(), "The image is not visible!");
 
+        log.info("STEP 2.3 Verify that the user name is presented");
         String postUserTxt = postModal.getPostUser();
         Assert.assertEquals(postUserTxt, testUser);
     }

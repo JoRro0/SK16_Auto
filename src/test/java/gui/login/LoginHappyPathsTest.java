@@ -4,6 +4,7 @@ import com.GG.POM.HomePage;
 import com.GG.POM.LoginPage;
 import gui.base.BaseTest;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 public class LoginHappyPathsTest extends BaseTest {
@@ -12,10 +13,11 @@ public class LoginHappyPathsTest extends BaseTest {
     public static final String LOGIN_SUCCESSFUL_MSG = "Successful login!";
     public static final String LOGIN_NOT_SUCCESSFUL_MSG = "Wrong username or password!";
 
-
     @Test
-    public void verifyTheUserCanLoginWithValidCredentials() throws InterruptedException {
+    public void verifyTheUserCanLoginWithValidCredentials(ITestContext context) throws InterruptedException {
 
+        context.setAttribute("userName", "JoRro0");
+        context.setAttribute("password", "Georgi123*");
         HomePage homePage = new HomePage(super.driver, log);
 
         log.info("STEP 1: Not logged in user has opened the Skillo HomePage.");
@@ -38,10 +40,10 @@ public class LoginHappyPathsTest extends BaseTest {
         Assert.assertEquals(actualLoginFormTitle,LOGIN_FORM_TITLE);
 
         log.info("STEP 3. Provide username");
-        loginPage.provideUserName("JoRro0");
+        loginPage.provideUserName(context.getAttribute("userName").toString());
 
         log.info("STEP 4. Provide password");
-        loginPage.providePassword("Georgi123*");
+        loginPage.providePassword(context.getAttribute("password").toString());
 
         log.info("STEP 5. Click on loginButton");
         loginPage.clickOnLoginButton();
@@ -57,17 +59,10 @@ public class LoginHappyPathsTest extends BaseTest {
         log.info("STEP 6.1 Verify that HomePage navigation bar profile link displayed");
         boolean isShownNavProfileBar = homePage.isNavProfileShown();
         Assert.assertTrue(isShownNavProfileBar);
-
-
-
-
         Thread.sleep(4444);
 
-
     }
-   //1. Login with already registered user - valid credentials
 
    //2. Login with newly created/registered user - valid credentials
-
 
 }

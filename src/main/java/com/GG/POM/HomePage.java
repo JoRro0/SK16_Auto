@@ -21,7 +21,7 @@ public class HomePage extends BasePage {
     private WebElement navBarProfile;
     @FindBy(id = "nav-link-login")
     private WebElement navBarLogin;
-    @FindBy(id = "//i[@class='fas fa-sign-out-alt fa-lg']")
+    @FindBy(xpath = "//i[@class='fas fa-sign-out-alt fa-lg']")
     private WebElement navBarLogOut;
 
     public HomePage(WebDriver driver, Logger log) {
@@ -75,6 +75,7 @@ public class HomePage extends BasePage {
     public void clickOnLogOutButton() {
         waitAndClickOnWebElement(navBarLogOut);
     }
+
     public boolean isNavLogOutLinkShown() {
         return isPresented(navBarLogOut);
     }

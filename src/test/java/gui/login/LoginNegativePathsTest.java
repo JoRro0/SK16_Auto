@@ -4,8 +4,8 @@ import com.GG.POM.HomePage;
 import com.GG.POM.LoginPage;
 import gui.base.BaseTest;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.GG.POM.LoginPage.LOGIN_FORM_TITLE;
@@ -16,7 +16,8 @@ import static gui.login.LoginHappyPathsTest.LOGIN_NOT_SUCCESSFUL_MSG;
 public class LoginNegativePathsTest extends BaseTest {
 
     @Test()
-    public void verifyUserCannotLoginWithWrongUserName() {
+    public void verifyUserCannotLoginWithWrongUserName(ITestContext context) {
+        context.setAttribute("wrongPassword", "wrongPassword");
         LoginPage loginPage = new LoginPage(super.driver, log);
 
         log.info("STEP 1: Already registered user is landing on Iskilo login page");
@@ -33,7 +34,7 @@ public class LoginNegativePathsTest extends BaseTest {
         Assert.assertEquals(actualLoginPageFormTitle,  LOGIN_FORM_TITLE);
 
         log.info("Step 2 Input WRONG user name");
-        loginPage.provideUserName("WRONG");
+        loginPage.provideUserName(context.getAttribute("wrongPassword").toString());
 
         log.info("Step 3 Input password");
         loginPage.providePassword("testing");
