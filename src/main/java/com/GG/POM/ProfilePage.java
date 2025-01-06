@@ -145,7 +145,6 @@ public class ProfilePage extends BasePage {
 
     public void closePostModal() {
 
-
     }
 
 }

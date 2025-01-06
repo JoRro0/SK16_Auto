@@ -59,36 +59,6 @@ public class PostTests extends BaseTest {
         Assert.assertEquals(postUserTxt, context.getAttribute("userName").toString());
     }
 
-//    @Test (priority = 1)
-//    public void verifyUserCanLikePost() {
-//        HomePage homePage = new HomePage(super.driver, log);
-//        LoginPage loginPage = new LoginPage(super.driver, log);
-//
-//        log.info("The user has navigated to the Login page.");
-//        loginPage.navigateToLoginPage();
-//
-//        log.info("The user has logged in with username and password.");
-//        loginPage.loginWithUSerAndPassword(testUser, testPassword);
-//
-//        log.info("The user has navigated to the Profile page.");
-//        homePage.clickOnNavBarProfile();
-//
-//        ProfilePage profilePage = new ProfilePage(super.driver, log);
-//        profilePage.clickPost(0);
-//        log.info("The user has clicked on the first post.");
-//
-//        profilePage.clickOnLikeButton();
-//        log.info("The user has clicked on the like button.");
-//        profilePage.isLikeMessageVisible();
-//
-//    }
-
-//    @Test
-//    public void verifyUserCanDislikePost() {
-//       ProfilePage profilePage = new ProfilePage(super.driver, log);
-//       profilePage.navigateTo("posts/all");
-//    }
-
     @Test (priority = 1)
     public void verifyUserCanChangePostStatusFromPublicToPrivate(ITestContext context) {
         HomePage homePage = new HomePage(super.driver, log);
