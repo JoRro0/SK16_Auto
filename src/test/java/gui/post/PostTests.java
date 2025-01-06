@@ -3,18 +3,21 @@ package gui.post;
 import com.GG.POM.*;
 import gui.base.BaseTest;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.Test;
 
 import java.io.File;
 
+import static com.GG.POM.LoginPage.LOGIN_FORM_TITLE;
+
 public class PostTests extends BaseTest {
-    public static final String testUser = "JoRro0";
-    public static final String testPassword = "Georgi123*";
     public static final String caption = "Pivot!";
     File postPicture = new File("C:\\Users\\35988\\Desktop\\SKILLO_AT_16_TAF-master\\src\\test\\resources\\piiivot.jpg");
 
     @Test(priority = 0)
-    public void verifyUserCanCreatePost() {
+    public void verifyUserCanCreatePost(ITestContext context) {
+        context.setAttribute("userName", "JoRro0");
+        context.setAttribute("password", "Georgi123*");
         log.info("STEP 1: Already registered user is landing on Iskilo Home page");
         HomePage homePage = new HomePage(super.driver, log);
         homePage.openHomePage();
@@ -25,7 +28,7 @@ public class PostTests extends BaseTest {
 
         log.info("STEP 2 Input valid user name and password");
         LoginPage loginPage = new LoginPage(super.driver, log);
-        loginPage.loginWithUSerAndPassword(testUser,testPassword);
+        loginPage.loginWithUSerAndPassword(context.getAttribute("userName").toString(),context.getAttribute("password").toString());
 
         log.info("STEP 2.1 Verify the New post link is presented!");
         boolean isShownNavBarNewPostLink = homePage.isNavNewPostShown();
@@ -51,65 +54,103 @@ public class PostTests extends BaseTest {
         PostModal postModal = new PostModal(super.driver, log);
         Assert.assertTrue(postModal.isImageVisible(), "The image is not visible!");
 
-        log.info("STEP 2.3 Verify that the user name is presented");
+        log.info("STEP 2.3 Verify that the user name: "+context.getAttribute("userName").toString() +" is presented");
         String postUserTxt = postModal.getPostUser();
-        Assert.assertEquals(postUserTxt, testUser);
+        Assert.assertEquals(postUserTxt, context.getAttribute("userName").toString());
     }
+
+//    @Test (priority = 1)
+//    public void verifyUserCanLikePost() {
+//        HomePage homePage = new HomePage(super.driver, log);
+//        LoginPage loginPage = new LoginPage(super.driver, log);
+//
+//        log.info("The user has navigated to the Login page.");
+//        loginPage.navigateToLoginPage();
+//
+//        log.info("The user has logged in with username and password.");
+//        loginPage.loginWithUSerAndPassword(testUser, testPassword);
+//
+//        log.info("The user has navigated to the Profile page.");
+//        homePage.clickOnNavBarProfile();
+//
+//        ProfilePage profilePage = new ProfilePage(super.driver, log);
+//        profilePage.clickPost(0);
+//        log.info("The user has clicked on the first post.");
+//
+//        profilePage.clickOnLikeButton();
+//        log.info("The user has clicked on the like button.");
+//        profilePage.isLikeMessageVisible();
+//
+//    }
+
+//    @Test
+//    public void verifyUserCanDislikePost() {
+//       ProfilePage profilePage = new ProfilePage(super.driver, log);
+//       profilePage.navigateTo("posts/all");
+//    }
 
     @Test (priority = 1)
-    public void verifyUserCanLikePost() {
+    public void verifyUserCanChangePostStatusFromPublicToPrivate(ITestContext context) {
         HomePage homePage = new HomePage(super.driver, log);
         LoginPage loginPage = new LoginPage(super.driver, log);
 
-        log.info("The user has navigated to the Login page.");
+        log.info("STEP 1 The user has navigated to the Login page.");
         loginPage.navigateToLoginPage();
+        log.info("STEP 1.1 Verify that the login link is presented!");
+        boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
+        Assert.assertTrue(isShownNavBarLoginLink);
 
-        log.info("The user has logged in with username and password.");
-        loginPage.loginWithUSerAndPassword(testUser, testPassword);
+        log.info("STEP 1.2 Verify that the login form is presented!");
+        String actualLoginPageFormTitle = loginPage.getLoginPageFormTitle();
+        Assert.assertEquals(actualLoginPageFormTitle,  LOGIN_FORM_TITLE);
 
-        log.info("The user has navigated to the Profile page.");
+        log.info("STEP 2 The user has logged in with username and password.");
+        loginPage.loginWithUSerAndPassword(context.getAttribute("userName").toString(), context.getAttribute("password").toString());
+
+        log.info(" STEP 3 The user has navigated to the Profile page.");
         homePage.clickOnNavBarProfile();
 
         ProfilePage profilePage = new ProfilePage(super.driver, log);
         profilePage.clickPost(0);
-        log.info("The user has clicked on the first post.");
+        log.info("STEP 4 The user has clicked on the first post.");
 
-        profilePage.ClickOnLikeButton();
-        log.info("The user has clicked on the like button.");
-        profilePage.isLikeMessageVisible();
+        profilePage.clickOnPrivacyPostButton();
+        log.info(" STEP 5 The user has clicked on the lock post button.");
+        log.info("STEP 5.1 Verify that the lock post message is presented.");
+        boolean isPostPrivacyMessageVisible = profilePage.isPostPrivacyMessageShown();
+        Assert.assertTrue(isPostPrivacyMessageVisible);
 
     }
-
-    @Test
-    public void verifyUserCanDislikePost() {
-       ProfilePage profilePage = new ProfilePage(super.driver, log);
-       profilePage.navigateTo("posts/all");
-    }
-
     @Test(priority = 4)
-    public void verifyUserCanDeletePost() {
+    public void verifyUserCanDeletePost(ITestContext context) {
         HomePage homePage = new HomePage(super.driver, log);
         LoginPage loginPage = new LoginPage(super.driver, log);
 
-        log.info("The user has navigated to the Login page.");
+        log.info("STEP 1 The user has navigated to the Login page");
         loginPage.navigateToLoginPage();
+        log.info("STEP 1.1 Verify that the login link is presented");
+        boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
+        Assert.assertTrue(isShownNavBarLoginLink);
 
-        log.info("The user has logged in with username and password.");
-        loginPage.loginWithUSerAndPassword(testUser, testPassword);
+        log.info("STEP 2 The user has logged in with username and password");
+        loginPage.loginWithUSerAndPassword(context.getAttribute("userName").toString(), context.getAttribute("password").toString());
 
-        log.info("The user has navigated to the Profile page.");
+        log.info("STEP 3 The user has navigated to the Profile page.");
         homePage.clickOnNavBarProfile();
 
         ProfilePage profilePage = new ProfilePage(super.driver, log);
+        profilePage.clickOnPostPrivateButton();
+        log.info("STEP 4 The user has clicked on private button");
         profilePage.clickPost(0);
-        log.info("The user has clicked on the first post.");
+        log.info("STEP 4.1 The user has clicked on the first post");
 
-        profilePage.ClickOnDeleteButton();
-        log.info("The user has clicked on the Delete post button.");
+        profilePage.clickOnDeleteButton();
+        log.info("STEP 5 The user has clicked on the Delete post button.");
 
-        profilePage.ClickOnYesButton();
-        log.info("The user has confirmed the deletion.");
+        profilePage.clickOnYesButton();
+        log.info("STEP 6 The user has confirmed the deletion.");
 
+        log.info("STEP 6.1 Verify that the message for deletion: "+profilePage.getConfirmDeletionMessage()+ " is presented!");
         profilePage.isDeletedMessageVisible();
     }
 }

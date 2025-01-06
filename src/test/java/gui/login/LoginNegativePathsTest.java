@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-
 import static com.GG.POM.LoginPage.LOGIN_FORM_TITLE;
 import static com.GG.POM.LoginPage.LOGIN_PAGE;
 import static gui.login.LoginHappyPathsTest.LOGIN_NOT_SUCCESSFUL_MSG;

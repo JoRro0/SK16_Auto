@@ -37,20 +37,28 @@ public class ProfilePage extends BasePage {
     @FindBy (xpath = "//div[contains(@aria-label,'Post disliked')]")
     private WebElement postDislikeMessage;
 
+    @FindBy (xpath = "//i[@class='fas fa-unlock ng-star-inserted']")
+    private WebElement postPrivacyButton;
 
-    public void ClickOnYesButton() {
+    @FindBy (xpath = "//div[text()=' Post is now private ']")
+    private WebElement postPrivacyMessage;
+
+    @FindBy (xpath = "//label[text()=' Private ']")
+    private WebElement postPrivateButton;
+
+    public void clickOnYesButton() {
         waitAndClickOnWebElement(areYouSureYesButton);
     }
 
-    public void ClickOnDeleteButton() {
+    public void clickOnDeleteButton() {
         waitAndClickOnWebElement(deletePostButton);
     }
 
-    public void ClickOnLikeButton() {
+    public void clickOnLikeButton() {
         waitAndClickOnWebElement(likeButton);
     }
 
-    public void ClickOnDisikeButton() {
+    public void ClickOnDislikeButton() {
         waitAndClickOnWebElement(dislikeButton);
     }
 
@@ -120,7 +128,20 @@ public class ProfilePage extends BasePage {
         }
         return isDislikeMessageVisible;
     }
+    public void clickOnPrivacyPostButton() {
+        waitAndClickOnWebElement(postPrivacyButton);
+    }
+    public boolean isPostPrivacyMessageShown() {
+        return isPresented(postPrivacyMessage);
+    }
+    public String getConfirmDeletionMessage() {
+        WebElement confirmDeletionMessage = driver.findElement(By.xpath("//div[contains(@aria-label,'Post Deleted!')]"));
+        return confirmDeletionMessage.getText();
+    }
 
+    public void clickOnPostPrivateButton() {
+        waitAndClickOnWebElement(postPrivateButton);
+    }
 
     public void closePostModal() {
 
