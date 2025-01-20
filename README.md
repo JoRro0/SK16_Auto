@@ -32,22 +32,18 @@ Many QA engineers are connected via the fast variety of  test automation activit
 ## Test activities performed with Selenium 4.25 and TestNG 10 Java unit framework:
 List of the test cases.
 - Registration feature
-    - Verify user cn registered in the system with valid data
-    - Verify user cannot register in the system with invalid data
+    - Verify user can register with valid data
 
 
 - Login feature
-    - Verify already registered user can successfully login in the system
-    - Verify already registered user can NOT successfully login in the system  with WRONG PASSWORD
-    - Verify already registered user can NOT successfully login in the system  with WRONG USERNAME
-    - Verify already registered user can NOT successfully login in the system  with NO CREDENTIALS
+    - verify user cannot log in with wrong username
+    - verify user cannot log in with wrong password
+    - verify the user can log in with valid credentials
 
 - Post feature
     - Verify  user can create a new post
+    - verify user can change post status from Public to Private
     - Verify user can delete a post
-  
-- Profile feature
-  - Verify use can upload profile picture
 
 - End to end scenario
   - Registration - Login - Profile - Post 

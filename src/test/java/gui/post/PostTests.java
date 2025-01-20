@@ -12,7 +12,7 @@ import static com.GG.POM.LoginPage.LOGIN_FORM_TITLE;
 
 public class PostTests extends BaseTest {
     public static final String caption = "Pivot!";
-    File postPicture = new File("C:\\Users\\35988\\Desktop\\SKILLO_AT_16_TAF-master\\src\\test\\resources\\piiivot.jpg");
+    File postPicture = new File("C:\\Users\\35988\\Desktop\\SKILLO_AT_16_TAF-master\\src\\test\\resources\\upload\\piiivot.jpg");
 
     @Test(priority = 0)
     public void verifyUserCanCreatePost(ITestContext context) {
@@ -91,7 +91,7 @@ public class PostTests extends BaseTest {
         Assert.assertTrue(isPostPrivacyMessageVisible);
 
     }
-    @Test(priority = 4)
+    @Test(priority = 2)
     public void verifyUserCanDeletePost(ITestContext context) {
         HomePage homePage = new HomePage(super.driver, log);
         LoginPage loginPage = new LoginPage(super.driver, log);

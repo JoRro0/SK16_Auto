@@ -1,7 +1,6 @@
 package com.GG.POM;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,14 +25,12 @@ public class RegistrationPage  extends BasePage {
     @FindBy(xpath = "//button[text()='Sign in']")
     private WebElement signInButton;
     @FindBy(xpath = "//h4[text()='Sign up']")
-    private WebElement signUpTitle;
+    private WebElement registrationPageTitle;
     @FindBy(xpath = "//div[text()=' Successful register! ']")
     private WebElement registerMSG;
     @FindBy(id = "nav-link-login")
     private WebElement navBarLogin;
-    //2.UI MAP
 
-    //3 CONSTRUCTOR
     public RegistrationPage(WebDriver driver, Logger log) {
         super(driver, log);
         PageFactory.initElements(driver, this);
@@ -67,12 +64,12 @@ public class RegistrationPage  extends BasePage {
         isPresented(publicInfoInputField);
         waitAndTypeTextInField(publicInfoInputField,publicInfo);
     }
-    public void clickOnSIgnInButton(){
+    public void clickOnRegistrationFormSubmitButton(){
         isPresented(signInButton);
         waitAndClickOnWebElement(signInButton);
     }
-    public boolean isSignUpTitleShown() {
-        return isPresented(signUpTitle);
+    public boolean isRegistrationTitleFormTitleShown() {
+        return isPresented(registrationPageTitle);
     }
     public String getRegisterActionMessage(){
         wait.until(ExpectedConditions.visibilityOf(registerMSG));

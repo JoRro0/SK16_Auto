@@ -15,19 +15,20 @@ public class RegistrationHappyPath extends BaseTest {
     @Test
     public void verifyUserCanRegisterWithValidData(ITestContext context) throws InterruptedException {
 
-        String USERNAME = RegistrationDataGenerator.createUser();
-        String EMAIL = RegistrationDataGenerator.createEmail();
-        String PASSWORD = RegistrationDataGenerator.createPasswordFor();
         String REGISTRATION_SUCCESSFUL_MSG = "Successful register!";
+
         context.setAttribute("birthDate", "12221989");
         context.setAttribute("publicInfo","testGeorgi");
+        context.setAttribute("password",RegistrationDataGenerator.createPasswordFor());
+        context.setAttribute("email",RegistrationDataGenerator.createEmail());
+        context.setAttribute("userName",RegistrationDataGenerator.createUser());
 
         RegistrationPage registrationPage = new RegistrationPage(super.driver, log);
         log.info("STEP 1 Not registered user is landing on Iskillo register page");
         log.info("STEP 1.1 Verify that the sign up title is presented!");
 
         registrationPage.navigateToRegPage();
-        boolean isSignUpTittleShown = registrationPage.isSignUpTitleShown();
+        boolean isSignUpTittleShown = registrationPage.isRegistrationTitleFormTitleShown();
         Assert.assertTrue(isSignUpTittleShown);
 
         log.info("STEP 1.2 Verify that the login nav link is presented!");
@@ -35,25 +36,25 @@ public class RegistrationHappyPath extends BaseTest {
         Assert.assertTrue(isLoginNavLinkShown);
 
         log.info("STEP 2 Input user name");
-        registrationPage.inputUserName(USERNAME);
+        registrationPage.inputUserName(context.getAttribute("userName").toString());
 
         log.info("STEP 2.1 Input email");
-        registrationPage.inputEmail(EMAIL);
+        registrationPage.inputEmail(context.getAttribute("email").toString());
 
         log.info("STEP 2.2 Input birth date");
         registrationPage.inputBirthDate(context.getAttribute("birthDate").toString());
 
         log.info("STEP 2.3 Input password");
-        registrationPage.inputPassword(PASSWORD);
+        registrationPage.inputPassword(context.getAttribute("password").toString());
 
         log.info("STEP 2.4 Input confirm password");
-        registrationPage.inputConfirmPassword(PASSWORD);
+        registrationPage.inputConfirmPassword(context.getAttribute("password").toString());
 
         log.info("STEP 2.1 Input public info");
         registrationPage.inputPublicInfo(context.getAttribute("publicInfo").toString());
 
-        log.info("STEP 3 Click on login button");
-        registrationPage.clickOnSIgnInButton();
+        log.info("STEP 3 Click on sign in button");
+        registrationPage.clickOnRegistrationFormSubmitButton();
 
         log.info("Step 3.1 Verify that the message" + registrationPage.getRegisterActionMessage() + " is shown");
         Assert.assertEquals(registrationPage.getRegisterActionMessage(), REGISTRATION_SUCCESSFUL_MSG);
@@ -73,6 +74,5 @@ public class RegistrationHappyPath extends BaseTest {
 
         boolean isURLLoaded = homePage.isURLLoaded(HOME_PAGE_URL);
         Assert.assertTrue(isURLLoaded);
-        Thread.sleep(4444);
     }
 }

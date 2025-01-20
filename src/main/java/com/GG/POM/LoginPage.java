@@ -44,12 +44,10 @@ public class LoginPage extends BasePage {
     }
 
     public void provideUserName(String userName) {
-//        isPresented(loginFormUserNameInputField);
         waitAndTypeTextInField(loginFormUserNameInputField, userName);
     }
 
     public void providePassword(String password) {
-//        isPresented(loginFormUserNameInputField);
         waitAndTypeTextInField(loginFormPasswordInputField, password);
     }
 
@@ -92,5 +90,4 @@ public class LoginPage extends BasePage {
         }
         return isLogInLinkVisible;
     }
-
 }

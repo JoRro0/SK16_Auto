@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/Users/35988/Desktop/SKILLO_AT_16_TAF-master"><classes><class name="gui.e2e.VerifyUserCanRegisterLoginUpdateProfilePost"><methods><include name="basicEndToEnd"/></methods></class><class name="gui.login.LoginHappyPathsTest"><methods><include name="verifyTheUserCannotLoginWithInvalidCredentials"/></methods></class><class name="gui.login.LoginNegativePathsTest"><methods><include name="verifyUserCannotLoginWithWrongUserName"/><include name="verifyUserCannotLoginWithEmptyUserName"/><include name="verifyUserCannotLoginWithWrongPassword"/><include name="verifyUserCannotLoginWithEmptyPassword"/><include name="verifyUserCannotLoginWithEmptyCredentialsData"/></methods></class><class name="gui.login.LoginPageLayoutTest"><methods><include name="verifyLoginPageLayout"/></methods></class><class name="gui.post.PostTests"><methods><include name="verifyUserCanCreatePost"/><include name="verifyUserCanLikePost"/><include name="verifyUserCanDislikePost"/><include name="verifyUserCanDeletePost"/></methods></class><class name="gui.registration.RegistrationHappyPath"><methods><include name="verifyUserCanRegisterWithValidData"/></methods></class></classes></test></suite>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/35988/Desktop/SKILLO_AT_16_TAF-master">
+        <classes>
+            <class name="gui.e2e.VerifyUserCanRegisterLoginUpdateProfilePost">
+                <methods>
+                    <include name="VerifyUserCanRegisterWithValidData"/>
+                    <include name="verifyTheUserCanLoginWithValidCredentials"/>
+                    <include name="verifyUserCanCreatePost"/>
+                    <include name="verifyUserCanChangePostStatusFromPublicToPrivate"/>
+                    <include name="verifyUserCanDeletePost"/>
+                </methods>
+            </class>
+            <class name="gui.login.LoginHappyPathsTest">
+                <methods>
+                    <include name="verifyTheUserCanLoginWithValidCredentials"/>
+                </methods>
+            </class>
+            <class name="gui.login.LoginNegativePathsTest">
+                <methods>
+                    <include name="verifyUserCannotLoginWithWrongUserName"/>
+                    <include name="verifyUserCannotLoginWithWrongPassword"/>
+                </methods>
+            </class>
+            <class name="gui.post.PostTests">
+                <methods>
+                    <include name="verifyUserCanCreatePost"/>
+                    <include name="verifyUserCanLikePost"/>
+                    <include name="verifyUserCanChangePostStatusFromPublicToPrivate"/>
+                </methods>
+            </class>
+            <class name="gui.registration.RegistrationHappyPath">
+                <methods>
+                    <include name="verifyUserCanRegisterWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

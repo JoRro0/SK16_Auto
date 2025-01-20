@@ -13,7 +13,7 @@ public class LoginHappyPathsTest extends BaseTest {
     public static final String LOGIN_SUCCESSFUL_MSG = "Successful login!";
     public static final String LOGIN_NOT_SUCCESSFUL_MSG = "Wrong username or password!";
 
-    @Test
+    @Test()
     public void verifyTheUserCanLoginWithValidCredentials(ITestContext context) throws InterruptedException {
 
         context.setAttribute("userName", "JoRro0");
@@ -59,10 +59,5 @@ public class LoginHappyPathsTest extends BaseTest {
         log.info("STEP 6.1 Verify that HomePage navigation bar profile link displayed");
         boolean isShownNavProfileBar = homePage.isNavProfileShown();
         Assert.assertTrue(isShownNavProfileBar);
-        Thread.sleep(4444);
-
     }
-
-   //2. Login with newly created/registered user - valid credentials
-
 }
