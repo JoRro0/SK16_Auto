@@ -127,7 +127,7 @@ public class VerifyUserCanRegisterLoginUpdateProfilePost extends BaseTest {
         Assert.assertTrue(isShownNavProfileBar);
     }
     public static final String caption = "Pivot!";
-    File postPicture = new File("C:\\Users\\35988\\Desktop\\SKILLO_AT_16_TAF-master\\src\\test\\resources\\upload\\piiivot.jpg");
+    File postPicture = new File("src/test/resources/upload/piiivot.jpg");
 
     @Test(priority = 2)
     public void verifyUserCanCreatePost(ITestContext context) {
