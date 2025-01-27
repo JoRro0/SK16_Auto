@@ -18,15 +18,15 @@ public class PostTests extends BaseTest {
     public void verifyUserCanCreatePost(ITestContext context) {
         context.setAttribute("userName", "JoRro0");
         context.setAttribute("password", "Georgi123*");
-        log.info("STEP 1: Already registered user is landing on Iskilo Home page");
+        log.info("STEP 1.: Already registered user is landing on Iskilo Home page");
         HomePage homePage = new HomePage(super.driver, log);
         homePage.openHomePage();
-        log.info("STEP 1.1: 1.1 Verify that the login link is presented!");
+        log.info("STEP 1.1: Verify that the login link is presented!");
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
         homePage.clickOnNavBarLogin();
 
-        log.info("STEP 2 Input valid user name and password");
+        log.info("STEP 2. Input valid user name and password");
         LoginPage loginPage = new LoginPage(super.driver, log);
         loginPage.loginWithUSerAndPassword(context.getAttribute("userName").toString(),context.getAttribute("password").toString());
 
@@ -37,12 +37,12 @@ public class PostTests extends BaseTest {
 
         PostPage postPage = new PostPage(super.driver, log);
 
-        log.info("STEP 2.2 Upload a picture");
+        log.info("STEP 2.2. Upload a picture");
         postPage.uploadPicture(postPicture);
 
         postPage.providePostCaption(caption);
         postPage.clickCreatePostButton();
-        log.info("STEP 2.2 Verify that the new post (picture) is presented");
+        log.info("STEP 2.4. Verify that the new post (picture) is presented");
         boolean isImageVisible = postPage.isImageVisible();
         Assert.assertTrue(isImageVisible);
 
@@ -54,7 +54,7 @@ public class PostTests extends BaseTest {
         PostModal postModal = new PostModal(super.driver, log);
         Assert.assertTrue(postModal.isImageVisible(), "The image is not visible!");
 
-        log.info("STEP 2.3 Verify that the user name: "+context.getAttribute("userName").toString() +" is presented");
+        log.info("STEP 2.4. Verify that the user name: "+context.getAttribute("userName").toString() +" is presented");
         String postUserTxt = postModal.getPostUser();
         Assert.assertEquals(postUserTxt, context.getAttribute("userName").toString());
     }
@@ -64,29 +64,29 @@ public class PostTests extends BaseTest {
         HomePage homePage = new HomePage(super.driver, log);
         LoginPage loginPage = new LoginPage(super.driver, log);
 
-        log.info("STEP 1 The user has navigated to the Login page.");
+        log.info("STEP 1. The user has navigated to the Login page.");
         loginPage.navigateToLoginPage();
-        log.info("STEP 1.1 Verify that the login link is presented!");
+        log.info("STEP 1.1. Verify that the login link is presented!");
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
 
-        log.info("STEP 1.2 Verify that the login form is presented!");
+        log.info("STEP 1.2. Verify that the login form is presented!");
         String actualLoginPageFormTitle = loginPage.getLoginPageFormTitle();
         Assert.assertEquals(actualLoginPageFormTitle,  LOGIN_FORM_TITLE);
 
-        log.info("STEP 2 The user has logged in with username and password.");
+        log.info("STEP 2. The user has logged in with username and password.");
         loginPage.loginWithUSerAndPassword(context.getAttribute("userName").toString(), context.getAttribute("password").toString());
 
-        log.info(" STEP 3 The user has navigated to the Profile page.");
+        log.info(" STEP 3. The user has navigated to the Profile page.");
         homePage.clickOnNavBarProfile();
 
         ProfilePage profilePage = new ProfilePage(super.driver, log);
         profilePage.clickPost(0);
-        log.info("STEP 4 The user has clicked on the first post.");
+        log.info("STEP 4. The user has clicked on the first post.");
 
         profilePage.clickOnPrivacyPostButton();
-        log.info(" STEP 5 The user has clicked on the lock post button.");
-        log.info("STEP 5.1 Verify that the lock post message is presented.");
+        log.info("STEP 5. The user has clicked on the lock post button.");
+        log.info("STEP 5.1. Verify that the lock post message is presented.");
         boolean isPostPrivacyMessageVisible = profilePage.isPostPrivacyMessageShown();
         Assert.assertTrue(isPostPrivacyMessageVisible);
 

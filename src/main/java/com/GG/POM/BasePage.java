@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
+import static com.GG.POM.LoginPage.LOGIN_PAGE;
+
 public class BasePage {
     final String BASE_URL = "http://training.skillo-bg.com:4300";
     WebDriver driver;
@@ -83,6 +85,21 @@ public class BasePage {
         String locatorExpression = webElmInfo[1];
         String info  = "LOCATOR STRATEGY BY: "+locatorStrategy.toUpperCase()+" LOCATOR EXPRESSION: "+locatorExpression;
         return  info;
+    }
+    @FindBy(id = "defaultLoginFormUsername")
+    private WebElement loginFormUserNameInputField;
+    @FindBy(id = "defaultLoginFormPassword")
+    private WebElement loginFormPasswordInputField;
+    @FindBy(id = "sign-in-button")
+    private WebElement loginFormSubmitButton;
+
+    public void logInSkillo(){
+        final String userName = "JoRro07";
+        final String password = "Georgi123*";
+        navigateTo(LOGIN_PAGE);
+        waitAndTypeTextInField(loginFormUserNameInputField, userName);
+        waitAndTypeTextInField(loginFormPasswordInputField, password);
+        waitAndClickOnWebElement(loginFormSubmitButton);
     }
 
 }

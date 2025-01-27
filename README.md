@@ -111,5 +111,5 @@ If you find any bugs that you want to report, please do so with the bug report a
 
 ## Contact
 
-- [Skulo Student](mailto:skiloSutdent@abv.bg)
-- Project Link: [TAF Selenium 4 TestNG 7 ](https://github.com/)
+- [Skulo Student](mailto:georgi_georgiev8989@abv.bg@abv.bg)
+- Project Link: [TAF Selenium 4 TestNG 7 ](https://github.com/JoRro0/SK16_Auto.githttps://github.com/)

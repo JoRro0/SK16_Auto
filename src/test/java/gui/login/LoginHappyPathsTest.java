@@ -20,7 +20,7 @@ public class LoginHappyPathsTest extends BaseTest {
         context.setAttribute("password", "Georgi123*");
         HomePage homePage = new HomePage(super.driver, log);
 
-        log.info("STEP 1: Not logged in user has opened the Skillo HomePage.");
+        log.info("STEP 1.: Not logged in user has opened the Skillo HomePage.");
         homePage.openHomePage();
 
         log.info("STEP 1.1.Verify the user is on the home page ");
@@ -31,7 +31,7 @@ public class LoginHappyPathsTest extends BaseTest {
         boolean isShownNavBarLoginLink = homePage.isNavLoginShown();
         Assert.assertTrue(isShownNavBarLoginLink);
 
-        log.info("STEP 2: The use is navigating to the login page via click on navigation bar login link");
+        log.info("STEP 2.: The use is navigating to the login page via click on navigation bar login link");
         homePage.clickOnNavBarLogin();
 
         log.info("STEP 2.1.: The user is successfully on the login page");
@@ -52,11 +52,11 @@ public class LoginHappyPathsTest extends BaseTest {
         String actualLoginActionMSG = loginPage.getLoginActionMessage();
         Assert.assertEquals(actualLoginActionMSG,LOGIN_SUCCESSFUL_MSG);
 
-        log.info("STEP 6.1 Verify that the LogOut link is displayed");
+        log.info("STEP 6.1. Verify that the LogOut link is displayed");
         boolean isShownNavBarLogOutLink = homePage.isNavLogOutLinkShown();
         Assert.assertTrue(isShownNavBarLogOutLink);
 
-        log.info("STEP 6.1 Verify that HomePage navigation bar profile link displayed");
+        log.info("STEP 6.2. Verify that HomePage navigation bar profile link displayed");
         boolean isShownNavProfileBar = homePage.isNavProfileShown();
         Assert.assertTrue(isShownNavProfileBar);
     }
